@@ -6,7 +6,10 @@
 package br.com.container.modelo;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -21,6 +24,10 @@ public class Aluno extends Pessoa implements Serializable {
 
     private String cpf;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCateira")
+    private CarteiraBiblioteca carteiraBiblioteca;
+
     public Aluno() {
     }
 
@@ -30,6 +37,14 @@ public class Aluno extends Pessoa implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public CarteiraBiblioteca getCarteiraBiblioteca() {
+        return carteiraBiblioteca;
+    }
+
+    public void setCarteiraBiblioteca(CarteiraBiblioteca carteiraBiblioteca) {
+        this.carteiraBiblioteca = carteiraBiblioteca;
     }
 
 }
