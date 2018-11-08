@@ -30,8 +30,9 @@ import org.hibernate.Session;
 public class ProfessorControle implements Serializable {
 
     private boolean mostraToolbar = false;
-    private boolean mostraToolbarPesquisaBC = false;
+//    private boolean mostraToolbarPesquisaBC = false;
     private boolean pesquisaPorDisciplina = false;
+//    private boolean mostraPesquisar = false;
     private String pesqNome = "";
     private String pesqDisciplina = "";
     private String pesqCidade = "";
@@ -62,16 +63,18 @@ public class ProfessorControle implements Serializable {
         mostraToolbar = !mostraToolbar;
     }
 
-    public void mudaToolbarPesquisaBC() {
-        prof = new Professor();
-        endereco = new Endereco();
-        prof.setWhatsapp(true);
-        profs = new ArrayList();
-        disciplinas = new ArrayList();
-        pesqCidade = "";
-        pesqBairro = "";
-        mostraToolbarPesquisaBC = !mostraToolbarPesquisaBC;
-    }
+//    public void mudaToolbarPesquisaBC() {
+//        prof = new Professor();
+//        endereco = new Endereco();
+//        prof.setWhatsapp(true);
+//        profs = new ArrayList();
+//        disciplinas = new ArrayList();
+//        pesqCidade = "";
+//        pesqBairro = "";
+//        mostraToolbar = false;
+//        mostraPesquisar = false; 
+//        mostraToolbarPesquisaBC = !mostraToolbarPesquisaBC;
+//    }
 
     public void pesquisar() {
         dao = new ProfessorDaoImpl();
@@ -173,13 +176,7 @@ public class ProfessorControle implements Serializable {
     }
 //Getters e Setters
 
-    public boolean isMostraToolbarPesquisaBC() {
-        return mostraToolbarPesquisaBC;
-    }
-
-    public void setMostraToolbarPesquisaBC(boolean mostraToolbarPesquisaBC) {
-        this.mostraToolbarPesquisaBC = mostraToolbarPesquisaBC;
-    }
+    
 
     public String getPesqCidade() {
         return pesqCidade;
@@ -282,4 +279,6 @@ public class ProfessorControle implements Serializable {
         this.endereco = endereco;
     }
 
+  
+ 
 }

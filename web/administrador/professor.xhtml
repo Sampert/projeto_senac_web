@@ -19,8 +19,7 @@
                                      update="@form" process="@this panelGridPesq" />
                     <p:separator></p:separator>
                     <p:commandButton value="Novo" actionListener="#{profC.mudaToolbar}" update="@form" global="false"  />
-                    <p:separator></p:separator>
-                    <p:commandButton value="Pesquisar Bairro/Cidade" actionListener="#{profC.mudaToolbarPesquisaBC()}" update="@form" global="false"  />
+
                 </p:toolbarGroup>
             </p:toolbar>
 
@@ -40,8 +39,11 @@
 
                     <p:outputLabel for="pesqNome" value="Nome Professor:"/>
                     <p:inputText id="pesqNome" value="#{profC.pesqNome}" style="margin-left: 5px"/>
-                    <p:outputLabel for="pesqDisc" value="Disciplina:" />
-                    <p:inputText id="pesqDisc" value="#{profC.pesqDisciplina}" style="margin-left: 5px"/>
+                    <p:outputLabel for="pesqCidade" value="Cidade:" />
+                    <p:inputText id="pesqCidade" value="#{profC.pesqCidade}" style="margin-left: 5px"/>
+                    <p:outputLabel for="pesqBairro" value="Bairro:" />
+                    <p:inputText id="pesqBairro" value="#{profC.pesqBairro}" style="margin-left: 5px"/>
+                    <p:spacer />
 
                 </p:panelGrid>
 
@@ -55,58 +57,6 @@
                     </p:column>
                     <p:column headerText="Email">
                         <h:outputText value="#{prof.email}" />
-                    </p:column>
-                    <p:column headerText="Fone">
-                        <h:outputText value="#{prof.foneMovel}" />
-                    </p:column>
-                    <p:column headerText="Disciplina" >
-                        <h:outputText value="#{prof.disciplinas}" />
-                    </p:column>
-                    <p:column headerText="Whatsapp">
-                        <p:selectBooleanButton value="#{prof.whatsapp}" disabled="true" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
-                    </p:column>
-
-                    <p:column headerText="Alterar" class="centralizado tabela_botao_usuario"  >
-                        <p:commandButton icon="ui-icon-pencil" title="Alterar"
-                                         process="@this" update="@form" actionListener="#{profC.alterarProf}">
-                            <f:setPropertyActionListener target="#{profC.prof}" value="#{prof}"/>          
-                        </p:commandButton>
-
-                        <p:commandButton icon="ui-icon-trash" actionListener="#{profC.excluir()}"
-                                         update="dadosProf" title="Excluir">
-                            <p:confirm header="Confirmação" message="Tem certeza exclusão?" 
-                                       icon="ui-icon-alert" />
-                            <f:setPropertyActionListener target="#{profC.prof}" value="#{prof}"   />
-                        </p:commandButton>
-                    </p:column>
-                </p:dataTable>
-
-            </h:panelGroup>
-
-            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" 
-                                 icon="ui-icon-check" />
-                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" 
-                                 icon="ui-icon-close" />
-            </p:confirmDialog>
-
-            <h:panelGroup id="aba_pesquisa_cb" rendered="#{profC.mostraToolbarPesquisaBC}">
-                <p:panelGrid id="panelGridPesqBairroCidade" columns="2" layout="grid" columnClasses="ui-grid-col-1, ui-grid-col-8" styleClass="painel_grid_noborder" >
-
-                    <p:outputLabel for="pesqCidade" value="Cidade:" />
-                    <p:inputText id="pesqCidade" value="#{profC.pesqCidade}" style="margin-left: 5px"/>
-                    <p:outputLabel for="pesqBairro" value="Bairro:" />
-                    <p:inputText id="pesqBairro" value="#{profC.pesqBairro}" style="margin-left: 5px"/>
-                    <p:spacer />
-
-                </p:panelGrid>
-                <p:dataTable id="dadosProfPesquisaCidadeBairro" value="#{profC.modelProfs}" var="prof" reflow="true" paginator="true"
-                             style="margin-top: 20px;"  emptyMessage="Nenhum professor encontrado" rows="10" paginatorPosition="bottom"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             currentPageReportTemplate="[ {currentPage} de {totalPages}  ]"
-                             rowsPerPageTemplate="5,10,15">
-                    <p:column headerText="Nome">
-                        <h:outputText value="#{prof.nome}" />
                     </p:column>
                     <p:column headerText="Fone">
                         <h:outputText value="#{prof.foneMovel}" />
@@ -137,9 +87,18 @@
                             <f:setPropertyActionListener target="#{profC.prof}" value="#{prof}"   />
                         </p:commandButton>
                     </p:column>
-
                 </p:dataTable>
+
             </h:panelGroup>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" 
+                                 icon="ui-icon-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" 
+                                 icon="ui-icon-close" />
+            </p:confirmDialog>
+
+
 
             <h:panelGroup id="aba_alterar" rendered="#{profC.mostraToolbar}">
                 <p:fieldset legend="Dados pessoais" style="margin-bottom:20px">
