@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../logado/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="conteudo">
+
+        <h1 class="jr-titulo1">Atividades</h1>
+        <h:form id="form_pesquisa">
+            <h:panelGrid columns="2" columnClasses="left,right" style="width:100%">
+                <p:chart type="bar" model="#{chartC.animatedModel2}" style="width:100%"  />
+            </h:panelGrid>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/SenacTeste">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="senac_teste" password="" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/senac_teste?zeroDateTimeBehavior=convertToNull" username="root"/>
+</Context>

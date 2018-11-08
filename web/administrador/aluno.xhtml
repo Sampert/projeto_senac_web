@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../logado/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="conteudo">
+        <h1 class="jr-titulo1">Aluno</h1>
+
+        <h:form id="form_pesquisa">
+
+            <!--mostra a toolbar se mostra_toolbar == true-->
+            <p:toolbar styleClass="toolbar" rendered="#{!alunoC.mostra_toolbar}">
+                <p:toolbarGroup  >
+                    <p:commandButton value="Pesquisar" actionListener="#{alunoC.pesquisar()}"
+                                     update="dadosAluno" process="@this panelGridPesq" />
+                    <p:separator></p:separator>
+                    <p:commandButton value="Novo" actionListener="#{alunoC.novo}" update="@form" global="false"  />
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <!--mostra a toolbar se mostra_toolbar == false-->
+            <p:toolbar id="toolbar_pesquisa" styleClass="toolbar" rendered="#{alunoC.mostra_toolbar}">
+                <p:toolbarGroup  >
+                    <p:commandButton value="Salvar" action="#{alunoC.salvar()}" update="panelGrop" />
+                    <p:separator></p:separator>
+                    <p:commandButton value="Cancelar" actionListener="#{alunoC.novaPesquisa}" immediate="true"
+                                     update="@form" global="false" />
+                </p:toolbarGroup>
+
+            </p:toolbar>
+
+            <p:messages id="mens" autoUpdate="true" />
+
+            <!--inicio da tela de pesquisa-->
+            <h:panelGroup id="aba1" rendered="#{!alunoC.mostra_toolbar}" >
+                <p:panelGrid id="panelGridPesq" columns="2" layout="grid" columnClasses="ui-grid-col-1, ui-grid-col-5" styleClass="painel_grid_noborder" >
+
+                    <p:outputLabel for="cpf_pesquisa" value="Cpf :" />
+                    <p:inputMask  id="cpf_pesquisa" value="#{alunoC.aluno.cpf}"  mask="999.999.999-99" style="width: 100%; max-width: 600px;"/>
+                    <p:spacer />
+
+                </p:panelGrid>
+
+                <p:panel id="dadosAluno" header="Aluno" footer="Detalhes Cadatro" style="margin-bottom:20px">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <p:outputLabel  value="Nome :" />
+                        <p:outputLabel  value="#{alunoC.aluno.nome}" />
+                        <p:outputLabel  value="E-mail :" />
+                        <p:outputLabel  value="#{alunoC.aluno.email}" />
+                        <p:outputLabel  value="Telefone Fixo :" />
+                        <p:outputLabel  value="#{alunoC.aluno.foneFixo}" />
+                        <p:outputLabel  value="Telefone Movel :" />
+                        <p:outputLabel  value="#{alunoC.aluno.foneMovel}" />
+                    </h:panelGrid>
+                </p:panel>
+
+            </h:panelGroup> 
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" 
+                                 icon="ui-icon-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" 
+                                 icon="ui-icon-close" />
+            </p:confirmDialog>
+            <!--fim da tela de pesquisa-->
+
+            <!--inicio da tela de cadastro (salvar e alterar)-->
+            <h:panelGroup id="panelGrop" rendered="#{alunoC.mostra_toolbar}" >
+                <p:fieldset legend="Dados pessoais" style="margin-bottom:20px">
+                    <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-4" 
+                                 styleClass="painel_grid_noborder" >
+
+                        <p:outputLabel for="nome" value="Nome :" />
+                        <p:inputText id="nome" value="#{alunoC.aluno.nome}" required="true" style="width: 100%; max-width: 600px;"/>
+
+                        <p:outputLabel for="email" value="E-mail :" />
+                        <p:inputText id="email" value="#{alunoC.aluno.email}" type="email"
+                                     required="true" style="width: 100%; max-width: 600px;"/>
+
+                        <p:outputLabel for="cpf" value="Cpf :" />
+                        <p:inputMask  id="cpf" value="#{alunoC.aluno.cpf}" required="true" mask="999.999.999-99" style="width: 100%; max-width: 600px;"/>
+
+                        <p:outputLabel for="foneMovel" value="Fone Móvel" />
+                        <p:inputMask  id="foneMovel" value="#{alunoC.aluno.foneMovel}" required="true" mask="(99) 99999-9999" style="width: 100%; max-width: 600px;"/>
+                        <p:outputLabel for="btWhats" value="Móvel tem Whatsapp"/>
+                        <p:selectBooleanButton id="btWhats" value="#{alunoC.aluno.whatsapp}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close"/>
+
+                        <p:outputLabel for="foneFixo" value="Fone fixo:" />
+                        <p:inputMask id="foneFixo" value="#{alunoC.aluno.foneFixo}" required="false" mask="(99) 99999-9999" style="width: 100%; max-width: 600px;"/>
+                    </p:panelGrid>
+                </p:fieldset>
+                <p:fieldset legend="Endereço" style="margin-bottom:20px">
+                    <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-4" 
+                                 styleClass="painel_grid_noborder" >
+                        <p:outputLabel for="logradouro" value="Logradouro :" />
+                        <p:inputText id="logradouro" value="#{alunoC.endereco.logradouro}" required="true" style="width: 100%; max-width: 600px;"/>
+
+                        <p:outputLabel for="numero" value="Numero :" />
+                        <p:inputText id="numero" value="#{alunoC.endereco.numero}" required="true" style="width: 100%; max-width: 600px;"/>
+
+                        <p:outputLabel for="bairro" value="Bairro :" />
+                        <p:inputText id="bairro" value="#{alunoC.endereco.bairro}" required="true" style="width: 100%; max-width: 600px;"/>
+
+                        <p:outputLabel for="cidade" value="Cidade :" />
+                        <p:inputText id="cidade" value="#{alunoC.endereco.cidade}" required="true" style="width: 100%; max-width: 600px;"/>
+
+                        <p:outputLabel for="complemento" value="Complemento:" />
+                        <p:inputText id="complemento" value="#{alunoC.endereco.complemento}" required="true" style="width: 100%; max-width: 600px;"/>
+
+                        <p:outputLabel for="observacao" value="Observacao :" />
+                        <p:inputText id="observacao" value="#{alunoC.endereco.observacao}" required="true" style="width: 100%; max-width: 600px;"/>
+                    </p:panelGrid>
+                </p:fieldset>
+
+            </h:panelGroup>
+            <!--fim da tela de cadastro-->
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
