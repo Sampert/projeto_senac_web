@@ -6,6 +6,7 @@
 package br.com.container.modelo;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -19,6 +20,7 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "idPessoa")
 public class Aluno extends Pessoa implements Serializable {
 
+    @Column(length = 20, unique = true)
     private String cpf;
 
     public Aluno() {

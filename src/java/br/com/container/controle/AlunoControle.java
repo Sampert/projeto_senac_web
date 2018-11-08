@@ -81,7 +81,6 @@ public class AlunoControle {
     //metodos getts e setts
     public void carregarParaAlterar() {
         mostra_toolbar = !mostra_toolbar;
-        aluno = modelAlunos.getRowData();
         endereco = aluno.getEndereco();
 
     }
