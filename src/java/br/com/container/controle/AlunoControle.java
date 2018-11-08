@@ -87,7 +87,6 @@ public class AlunoControle {
     }
 
     public void excluir() {
-        aluno = modelAlunos.getRowData();
         alunoDao = new AlunoDaoImpl();
         abreSessao();
         try {

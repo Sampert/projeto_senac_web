@@ -30,9 +30,7 @@ import org.hibernate.Session;
 public class ProfessorControle implements Serializable {
 
     private boolean mostraToolbar = false;
-//    private boolean mostraToolbarPesquisaBC = false;
     private boolean pesquisaPorDisciplina = false;
-//    private boolean mostraPesquisar = false;
     private String pesqNome = "";
     private String pesqDisciplina = "";
     private String pesqCidade = "";
@@ -62,19 +60,6 @@ public class ProfessorControle implements Serializable {
         pesqNome = "";
         mostraToolbar = !mostraToolbar;
     }
-
-//    public void mudaToolbarPesquisaBC() {
-//        prof = new Professor();
-//        endereco = new Endereco();
-//        prof.setWhatsapp(true);
-//        profs = new ArrayList();
-//        disciplinas = new ArrayList();
-//        pesqCidade = "";
-//        pesqBairro = "";
-//        mostraToolbar = false;
-//        mostraPesquisar = false; 
-//        mostraToolbarPesquisaBC = !mostraToolbarPesquisaBC;
-//    }
 
     public void pesquisar() {
         dao = new ProfessorDaoImpl();

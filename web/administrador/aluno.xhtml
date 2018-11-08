@@ -56,6 +56,19 @@
                         <p:outputLabel  value="Telefone Movel :" />
                         <p:outputLabel  value="#{alunoC.aluno.foneMovel}" />
                     </h:panelGrid>
+                    <p:column headerText="Alterar" class="centralizado tabela_botao_usuario"  >
+                        <p:commandButton icon="ui-icon-pencil" title="Alterar"
+                                         process="@this" update="@form" actionListener="#{alunoC.carregarParaAlterar()}">
+                            <f:setPropertyActionListener target="#{alunoC.aluno}" value="#{aluno}"/>          
+                        </p:commandButton>
+
+                        <p:commandButton icon="ui-icon-trash" actionListener="#{alunoC.excluir()}"
+                                         update="dadosAluno" title="Excluir">
+                            <p:confirm header="Confirmação" message="Tem certeza exclusão?" 
+                                       icon="ui-icon-alert" />
+                            <f:setPropertyActionListener target="#{alunoC.aluno}" value="#{aluno}"   />
+                        </p:commandButton>
+                    </p:column>
                 </p:panel>
 
             </h:panelGroup> 
