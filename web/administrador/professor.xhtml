@@ -49,9 +49,16 @@
 
                 <p:dataTable id="dadosProf" value="#{profC.modelProfs}" var="prof" reflow="true" paginator="true"
                              style="margin-top: 20px;"  emptyMessage="Nenhum professor encontrado" rows="10" paginatorPosition="bottom"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                              currentPageReportTemplate="[ {currentPage} de {totalPages}  ]"
                              rowsPerPageTemplate="5,10,15">
+                    <f:facet name="{Exporters}">
+
+                        <h:commandLink>
+                            <p:graphicImage name="pdf.png" library="imagem" width="24"/>
+                            <p:dataExporter type="pdf" target="dadosProf" fileName="Professores"/>
+                        </h:commandLink>
+                    </f:facet>
                     <p:column headerText="Nome">
                         <h:outputText value="#{prof.nome}" />
                     </p:column>
