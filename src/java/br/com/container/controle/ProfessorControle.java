@@ -151,17 +151,23 @@ public class ProfessorControle implements Serializable {
         try {
             abreSessao();
             dao.remover(prof, session);
+            profs.remove(prof);
             Mensagem.excluir("Professor " + prof.getNome());
+            modelProfs = new ListDataModel(profs);
             prof = new Professor();
+            limpar();
         } catch (Exception ex) {
             System.err.println("Erro ao excluir professor:\n" + ex.getMessage());
         } finally {
             session.close();
         }
     }
-//Getters e Setters
 
-    
+    public void limpar() {
+        prof = new Professor();
+        endereco = new Endereco();
+    }
+//Getters e Setters
 
     public String getPesqCidade() {
         return pesqCidade;
@@ -264,6 +270,4 @@ public class ProfessorControle implements Serializable {
         this.endereco = endereco;
     }
 
-  
- 
 }

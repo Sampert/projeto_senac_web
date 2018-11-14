@@ -82,6 +82,7 @@ public class UsuarioLogadoControle implements Serializable {
         }
     }
 
+    
     public void verificaSenhaAtual() {
         if (!senhaAtual.equals(usuario.getSenha())) {
             Mensagem.senhaAtualNaoConfere();

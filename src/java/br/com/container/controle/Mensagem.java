@@ -42,7 +42,7 @@ public class Mensagem {
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(
                                 FacesMessage.SEVERITY_INFO,
-                                msg + " Com erro na mnesadnakfs!", "")
+                                msg + " excluido com sucesso!", "")
                 );
     }
     

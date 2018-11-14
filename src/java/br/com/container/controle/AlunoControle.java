@@ -90,8 +90,6 @@ public class AlunoControle {
         abreSessao();
         try {
             alunoDao.remover(aluno, sessao);
-            alunos.remove(aluno);
-            modelAlunos = new ListDataModel(alunos);
             Mensagem.excluir("Aluno");
             limpar();
         } catch (Exception e) {
