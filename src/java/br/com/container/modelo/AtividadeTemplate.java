@@ -30,7 +30,7 @@ public class AtividadeTemplate implements Serializable {
     private String nome;
     private String descricao;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     @JoinColumn(name = "idPlanoTemplate")
     private PlanejamentoTemplate planejamentoTemplante;
 
