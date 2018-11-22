@@ -18,7 +18,7 @@
                     <p:commandButton value="Pesquisar" actionListener="#{planTempC.pesquisar()}"
                                      update="dadosTabela" process="@this panelGridPesq" />
                     <p:separator></p:separator>
-                    <p:commandButton value="Novo" actionListener="#{planTempC.novo}" update="@form" global="false"  />
+                    <p:commandButton value="Novo" actionListener="#{planTempC.novo}" update="@form" global="false" process="@this" />
                 </p:toolbarGroup>
             </p:toolbar>
             <!--mostra a toolbar se mostra_toolbar == false-->
@@ -52,7 +52,7 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              currentPageReportTemplate="[ {currentPage} de {totalPages}  ]"
                              rowsPerPageTemplate="5,10,15">
-                    
+
                     <p:column headerText="Nome">
                         <h:outputText value="#{planejamentoTemplate.nome}" />
                     </p:column>
@@ -99,10 +99,39 @@
                     <p:outputLabel for="descricao" value="Descrição :" />
                     <p:inputTextarea id="descricao" value="#{planTempC.planejamentoTemplate.descricao}" style="width: 100%; max-width: 600px;"/>
 
+                    <!--1° coluna-->
+                    <p:commandButton value="ADD Atividade" onclick="PF('addAtividade').show();" process="@this"/>
                 </p:panelGrid>
+
+                <p:dataTable id="dadosDialog" value="#{planTempC.planejamentoTemplate.atividadeTemplates}" var="atividade" reflow="true" paginator="true"
+                             style="margin-top: 20px;"  emptyMessage="Nenhuma função encontrado" rows="10" paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="[ {currentPage} de {totalPages}  ]"
+                             rowsPerPageTemplate="5,10,15">
+                    <f:facet name="header">Atividades Template</f:facet>
+
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{atividade.nome}" />
+                    </p:column>
+                    <p:column headerText="Descrição">
+                        <h:outputText value="#{atividade.descricao}" />
+                    </p:column>
+
+
+                </p:dataTable>
+
             </h:panelGroup>
             <!--fim da tela de cadastro-->
-
+            <p:dialog id="modal" header="Cadastro Atividade Template" widgetVar="addAtividade" modal="true" height="200" >
+                <h:panelGrid columns="2" >
+                    <p:outputLabel for="nomeAtividade" value="Atividade Template:" />
+                    <p:inputText id="nomeAtividade" value="#{planTempC.atividadeTemplate.nome}" required="true" size="40" style="width: 100%; max-width: 600px;"/>
+                    <p:outputLabel for="descricaoAtividade" value="Descrição Template:" />
+                    <p:inputTextarea id="descricaoAtividade" value="#{planTempC.atividadeTemplate.descricao}" style="width: 100%; max-width: 600px;" />
+                    <!--1° coluna-->
+                    <p:commandButton value="Adicionar" update="dadosDialog, modal" actionListener="#{planTempC.addAtividadeTemplate()}" process="@this, nomeAtividade, descricaoAtividade" onclick="PF('addAtividade').hide();" />
+                </h:panelGrid>
+            </p:dialog>   
         </h:form>
     </ui:define>
 

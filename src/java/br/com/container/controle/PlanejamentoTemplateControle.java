@@ -8,8 +8,10 @@ package br.com.container.controle;
 import br.com.container.dao.HibernateUtil;
 import br.com.container.dao.PlanejamentoTemplateDao;
 import br.com.container.dao.PlanejamentoTemplateDaoImpl;
+import br.com.container.modelo.AtividadeTemplate;
 import br.com.container.modelo.PlanejamentoTemplate;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -27,6 +29,7 @@ import org.hibernate.Session;
 public class PlanejamentoTemplateControle implements Serializable {
 
     private PlanejamentoTemplate planejamentoTemplate;
+    private AtividadeTemplate atividadeTemplate;
     private PlanejamentoTemplateDao planejamentoTemplateDao;
     private Session sessao;
     private DataModel<PlanejamentoTemplate> modelPlanejamentoTemplates;
@@ -42,6 +45,7 @@ public class PlanejamentoTemplateControle implements Serializable {
     }
 
     public void novo() {
+        planejamentoTemplate.setAtividadeTemplates(new ArrayList<>());
         mostra_toolbar = !mostra_toolbar;
 
     }
@@ -114,6 +118,11 @@ public class PlanejamentoTemplateControle implements Serializable {
         limpar();
     }
 
+    public void addAtividadeTemplate() {
+        planejamentoTemplate.getAtividadeTemplates().add(atividadeTemplate);
+        atividadeTemplate = new AtividadeTemplate();
+    }
+
     //getters e setters
     public PlanejamentoTemplate getPlanejamentoTemplate() {
         if (planejamentoTemplate == null) {
@@ -144,6 +153,17 @@ public class PlanejamentoTemplateControle implements Serializable {
 
     public List<PlanejamentoTemplate> getPlanejamentoTemplates() {
         return planejamentoTemplates;
+    }
+
+    public AtividadeTemplate getAtividadeTemplate() {
+        if (atividadeTemplate == null) {
+            atividadeTemplate = new AtividadeTemplate();
+        }
+        return atividadeTemplate;
+    }
+
+    public void setAtividadeTemplate(AtividadeTemplate atividadeTemplate) {
+        this.atividadeTemplate = atividadeTemplate;
     }
 
 }
