@@ -116,6 +116,21 @@
                     <p:column headerText="Descrição">
                         <h:outputText value="#{atividade.descricao}" />
                     </p:column>
+                    
+                    <p:column headerText="Alterar" class="centralizado tabela_botao_usuario"  >
+                        <p:commandButton icon="ui-icon-pencil" title="Alterar"
+                                         process="@this" update="@form" actionListener="#{planTempC.preparaAlterar()}">
+                            <f:setPropertyActionListener target="#{planTempC.planejamentoTemplate}" value="#{atividade}"   />          
+                        </p:commandButton>
+
+                        <p:commandButton icon="ui-icon-trash" actionListener="#{planTempC.excluir()}"
+                                         update="dadosDialog" title="Excluir">
+                            <p:confirm header="Confirmação" message="Tem certeza exclusão?" 
+                                       icon="ui-icon-alert" />
+                            <f:setPropertyActionListener target="#{planTempC.planejamentoTemplate}" value="#{atividade}"   />
+                        </p:commandButton>
+
+                    </p:column>
 
 
                 </p:dataTable>

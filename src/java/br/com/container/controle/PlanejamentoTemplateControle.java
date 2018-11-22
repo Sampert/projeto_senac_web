@@ -27,7 +27,7 @@ import org.hibernate.Session;
 @ManagedBean(name = "planTempC")
 @ViewScoped
 public class PlanejamentoTemplateControle implements Serializable {
-
+    
     private PlanejamentoTemplate planejamentoTemplate;
     private AtividadeTemplate atividadeTemplate;
     private PlanejamentoTemplateDao planejamentoTemplateDao;
@@ -35,7 +35,7 @@ public class PlanejamentoTemplateControle implements Serializable {
     private DataModel<PlanejamentoTemplate> modelPlanejamentoTemplates;
     private List<PlanejamentoTemplate> planejamentoTemplates;
     private boolean mostra_toolbar;
-
+    
     private void abreSessao() {
         if (sessao == null) {
             sessao = HibernateUtil.abreSessao();
@@ -43,21 +43,21 @@ public class PlanejamentoTemplateControle implements Serializable {
             sessao = HibernateUtil.abreSessao();
         }
     }
-
+    
     public void novo() {
         planejamentoTemplate.setAtividadeTemplates(new ArrayList<>());
         mostra_toolbar = !mostra_toolbar;
-
+        
     }
-
+    
     public void novaPesquisa() {
         mostra_toolbar = !mostra_toolbar;
     }
-
+    
     public void preparaAlterar() {
         mostra_toolbar = !mostra_toolbar;
     }
-
+    
     public void pesquisar() {
         planejamentoTemplateDao = new PlanejamentoTemplateDaoImpl();
         try {
@@ -71,16 +71,16 @@ public class PlanejamentoTemplateControle implements Serializable {
             sessao.close();
         }
     }
-
+    
     public void limpar() {
         planejamentoTemplate = new PlanejamentoTemplate();
     }
-
+    
     public void carregarParaAlterar() {
         mostra_toolbar = !mostra_toolbar;
         planejamentoTemplate = modelPlanejamentoTemplates.getRowData();
     }
-
+    
     public void excluir() {
         planejamentoTemplate = modelPlanejamentoTemplates.getRowData();
         planejamentoTemplateDao = new PlanejamentoTemplateDaoImpl();
@@ -97,9 +97,10 @@ public class PlanejamentoTemplateControle implements Serializable {
             sessao.close();
         }
     }
-
+    
     public void salvar() {
         planejamentoTemplateDao = new PlanejamentoTemplateDaoImpl();
+        carregarPlanejamentoParaAtividade();
         abreSessao();
         try {
             planejamentoTemplateDao.salvarOuAlterar(planejamentoTemplate, sessao);
@@ -114,10 +115,16 @@ public class PlanejamentoTemplateControle implements Serializable {
         }
     }
 
+    private void carregarPlanejamentoParaAtividade() {
+        for (AtividadeTemplate atiTemps : planejamentoTemplate.getAtividadeTemplates()) {
+            atiTemps.setPlanejamentoTemplante(planejamentoTemplate);
+        }
+    }
+    
     public void limparTela() {
         limpar();
     }
-
+    
     public void addAtividadeTemplate() {
         planejamentoTemplate.getAtividadeTemplates().add(atividadeTemplate);
         atividadeTemplate = new AtividadeTemplate();
@@ -130,40 +137,40 @@ public class PlanejamentoTemplateControle implements Serializable {
         }
         return planejamentoTemplate;
     }
-
+    
     public void setPlanejamentoTemplate(PlanejamentoTemplate planejamentoTemplate) {
         this.planejamentoTemplate = planejamentoTemplate;
     }
-
+    
     public DataModel<PlanejamentoTemplate> getModelPlanejamentoTemplates() {
         return modelPlanejamentoTemplates;
     }
-
+    
     public void setModelPlanejamentoTemplates(DataModel<PlanejamentoTemplate> modelPlanejamentoTemplates) {
         this.modelPlanejamentoTemplates = modelPlanejamentoTemplates;
     }
-
+    
     public boolean isMostra_toolbar() {
         return mostra_toolbar;
     }
-
+    
     public void setMostra_toolbar(boolean mostra_toolbar) {
         this.mostra_toolbar = mostra_toolbar;
     }
-
+    
     public List<PlanejamentoTemplate> getPlanejamentoTemplates() {
         return planejamentoTemplates;
     }
-
+    
     public AtividadeTemplate getAtividadeTemplate() {
         if (atividadeTemplate == null) {
             atividadeTemplate = new AtividadeTemplate();
         }
         return atividadeTemplate;
     }
-
+    
     public void setAtividadeTemplate(AtividadeTemplate atividadeTemplate) {
         this.atividadeTemplate = atividadeTemplate;
     }
-
+    
 }
