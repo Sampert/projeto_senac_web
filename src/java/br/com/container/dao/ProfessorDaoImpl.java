@@ -45,7 +45,7 @@ public class ProfessorDaoImpl extends BaseDaoImpl<Professor, Long> implements Pr
     public List<Professor> pesqPorNomeEDisciplina(String nome, String disciplina, Session session) throws HibernateException {
         Query consulta = session.createQuery("from Professor p where p.nome like :nome and p.disciplinas like :disciplinas");
         consulta.setParameter("nome", "%" + nome + "%");
-        consulta.setParameter("disciplinas", ";%" + disciplina + "%;");
+        consulta.setParameter("disciplinas", "%" + disciplina + "%");
         return consulta.list();
     }
 
@@ -53,7 +53,7 @@ public class ProfessorDaoImpl extends BaseDaoImpl<Professor, Long> implements Pr
     public List<Professor> pesqPorBairroCidade(String bairro, String cidade, Session session) throws HibernateException {
        Query consulta = session.createQuery("from Professor p where p.bairro like :bairro and p.cidade like :cidade");
         consulta.setParameter("bairro", "%" + bairro + "%");
-        consulta.setParameter("cidade", ";%" + cidade + "%;");
+        consulta.setParameter("cidade", "%" + cidade + "%");
         return consulta.list();
     }
 

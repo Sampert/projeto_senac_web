@@ -12,6 +12,7 @@ import br.com.container.modelo.AtividadeTemplate;
 import br.com.container.modelo.Curso;
 import br.com.container.modelo.DiaDaSemana;
 import br.com.container.modelo.Disciplina;
+import br.com.container.modelo.Empresa;
 import br.com.container.modelo.Endereco;
 import br.com.container.modelo.Funcao;
 import br.com.container.modelo.Funcionario;
@@ -60,6 +61,7 @@ public class HibernateUtil {
             cfg.addAnnotatedClass(Aluno.class);
             cfg.addAnnotatedClass(PlanejamentoTemplate.class);
             cfg.addAnnotatedClass(AtividadeTemplate.class);
+            cfg.addAnnotatedClass(Empresa.class);
 
             cfg.configure("/br/com/container/dao/hibernate.cfg.xml");
 

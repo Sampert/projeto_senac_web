@@ -45,6 +45,10 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "idPessoa")
     private Pessoa pessoa;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idEmpresa")
+    private Empresa empresa;
+
     public Endereco() {
     }
 
@@ -66,6 +70,14 @@ public class Endereco implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public String getLogradouro() {
@@ -123,7 +135,6 @@ public class Endereco implements Serializable {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-
 
     @Override
     public int hashCode() {

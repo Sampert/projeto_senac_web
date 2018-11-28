@@ -81,7 +81,7 @@
                         <h:outputText value="#{prof.endereco.bairro}" />
                     </p:column>
 
-                    <p:column headerText="Alterar" class="centralizado tabela_botao_usuario"  >
+                    <p:column headerText="Alterar" class="centralizado tabela_botao_usuario"  exportable="false">
                         <p:commandButton icon="ui-icon-pencil" title="Alterar"
                                          process="@this" update="@form" actionListener="#{profC.alterarProf}">
                         </p:commandButton>

@@ -14,6 +14,9 @@ import br.com.container.modelo.Perfil;
 import br.com.container.modelo.Usuario;
 import br.com.container.util.GeradorLetraNumero;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -134,19 +137,21 @@ public class UsuarioControle implements Serializable {
         }
     }
 
-    public void salvar() {
+    public void salvar() throws NoSuchAlgorithmException {
         usuario.setPerfil(perfil);
         usuarioDao = new UsuarioDaoImpl();
         abreSessao();
         String senha = "12345";
-        usuario.setSenha(senha);
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(senha.getBytes(),0,senha.length());
+        usuario.setSenha(new BigInteger(1,md.digest()).toString(16));
         if (usuario.getId() == null) {
             usuario.setEnable(true);
         }
         try {
 
             usuarioDao.salvarOuAlterar(usuario, sessao);
-//            EnviarEmails.enviaEmail(usuario);
+ //        EnviarEmails.enviaEmail(usuario);
             Mensagem.salvar("Usuario " + usuario.getNome());
             usuario = null;
             perfil = null;
